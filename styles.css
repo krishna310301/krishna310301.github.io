@@ -623,3 +623,80 @@ h2 {
     transition: none !important;
   }
 }
+
+/* ---------- dark theme ---------- */
+[data-theme="dark"] {
+  --bg: #0e1013;
+  --ink: #e8eaed;
+  --muted: #9aa0a6;
+  --faint: #6c727a;
+  --line: #232830;
+  --line-strong: #313842;
+  --accent: #4ec3d6;
+  --accent-strong: #79d6e5;
+  --ok: #3fb950;
+  --chip-bg: #16191d;
+  --panel-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .social-links a {
+  background: #21262d;
+  color: var(--ink);
+}
+
+[data-theme="dark"] .social-links a:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+[data-theme="dark"] .stack span {
+  background: transparent;
+}
+
+[data-theme="dark"] .frame-bar .dot {
+  background: #3a4048;
+}
+
+[data-theme="dark"] .avatar {
+  box-shadow: none;
+}
+
+.theme-toggle {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--faint);
+  background: none;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+
+.theme-toggle::before {
+  content: "\263E\00A0";
+}
+
+.theme-toggle::after {
+  content: "Dark";
+}
+
+[data-theme="dark"] .theme-toggle::before {
+  content: "\2600\00A0";
+}
+
+[data-theme="dark"] .theme-toggle::after {
+  content: "Light";
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.foot-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}

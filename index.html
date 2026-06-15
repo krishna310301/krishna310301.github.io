@@ -19,6 +19,16 @@
     <meta property="og:image" content="assets/profile-hero.jpg" />
     <meta name="twitter:card" content="summary" />
 
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("theme");
+          var sysDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+          document.documentElement.setAttribute("data-theme", saved || (sysDark ? "dark" : "light"));
+        } catch (e) {}
+      })();
+    </script>
+
     <!-- Inline SVG favicon -->
     <link
       rel="icon"
@@ -218,8 +228,22 @@
 
       <footer class="site-footer">
         <p class="foot-status"><span class="status-dot" aria-hidden="true"></span>All systems operational</p>
-        <p>&copy; 2026 Krishna Koushik Thokala &middot; Austin, TX</p>
+        <div class="foot-right">
+          <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle light and dark theme"></button>
+          <p>&copy; 2026 Krishna Koushik Thokala &middot; Austin, TX</p>
+        </div>
       </footer>
     </main>
+    <script>
+      (function () {
+        var btn = document.querySelector("[data-theme-toggle]");
+        if (!btn) return;
+        btn.addEventListener("click", function () {
+          var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+          document.documentElement.setAttribute("data-theme", next);
+          try { localStorage.setItem("theme", next); } catch (e) {}
+        });
+      })();
+    </script>
   </body>
 </html>
