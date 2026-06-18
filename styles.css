@@ -126,16 +126,6 @@ h1 {
   color: var(--ink);
 }
 
-.proof-line {
-  margin: 0 0 18px;
-  max-width: 64ch;
-  padding-left: 14px;
-  border-left: 2px solid var(--accent);
-  color: var(--muted);
-  font-size: 0.95rem;
-  line-height: 1.58;
-}
-
 .credential {
   margin: 0 0 20px;
   font-family: var(--mono);
@@ -186,48 +176,6 @@ h1 {
 .social-links a:hover {
   background: var(--accent);
   transform: translateY(-2px);
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 22px;
-}
-
-.hero-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 36px;
-  padding: 8px 14px;
-  font-family: var(--mono);
-  font-size: 0.76rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink);
-  border: 1px solid var(--line-strong);
-  border-radius: 7px;
-  transition: border-color 0.18s ease, color 0.18s ease, background-color 0.18s ease, transform 0.18s ease;
-}
-
-.hero-cta.primary {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: var(--bg);
-}
-
-.hero-cta:hover {
-  color: var(--accent);
-  border-color: var(--accent);
-  transform: translateY(-2px);
-}
-
-.hero-cta.primary:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
 }
 
 /* ---------- nav ---------- */

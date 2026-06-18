@@ -52,7 +52,6 @@
           <h1>Krishna Koushik Thokala</h1>
           <p class="role">Cloud Infrastructure Engineer &middot; Austin, TX</p>
           <p class="tagline">I build cloud infrastructure with an operations-first mindset &mdash; because I&rsquo;ve seen what &ldquo;down&rdquo; costs.</p>
-          <p class="proof-line">Built production-style AWS/Kubernetes projects with Terraform, CI/CD, observability, and cost controls.</p>
           <p class="credential">MS in Computer Science, Indiana University Bloomington</p>
           <div class="contact">
             <a class="email" href="mailto:krishnakoushikthokala@gmail.com">krishnakoushikthokala@gmail.com</a>
@@ -68,11 +67,6 @@
                 </svg>
               </a>
             </div>
-          </div>
-          <div class="hero-actions" aria-label="Primary portfolio actions">
-            <a class="hero-cta primary" href="#resume">Resume</a>
-            <a class="hero-cta" href="https://github.com/krishna310301" target="_blank" rel="noopener">GitHub</a>
-            <a class="hero-cta" href="#projects">Projects</a>
           </div>
         </div>
       </header>
@@ -157,10 +151,11 @@
             </a>
             <div class="project-body">
               <h3>CloudOps SRE Platform</h3>
+              <p>An EKS reliability dashboard for the operational view I always wanted: service health, deployments, incident timelines, MTTR, and SLO views in one place.</p>
               <ul class="project-outcomes">
                 <li><strong>Problem:</strong> Reliability signals were scattered across service health, deployments, incident timelines, MTTR, and SLO views.</li>
                 <li><strong>Architecture:</strong> React, FastAPI, PostgreSQL/RDS, Docker, Helm, EKS, and Terraform-backed AWS infrastructure.</li>
-                <li><strong>Operational proof:</strong> CI/CD checks, HPA/k6 load proof, CloudWatch/Grafana evidence, runbooks, and same-day destroy flow for cost control.</li>
+                <li><strong>Operational proof:</strong> CI/CD checks, HPA/k6 load proof, CloudWatch evidence, runbooks, and same-day destroy flow for cost control.</li>
               </ul>
               <div class="stack"><span>React</span><span>FastAPI</span><span>PostgreSQL/RDS</span><span>Docker</span><span>EKS</span><span>Helm</span><span>Terraform</span><span>CloudWatch</span></div>
             </div>
@@ -173,6 +168,7 @@
             </a>
             <div class="project-body">
               <h3>CloudOps Uptime Monitor</h3>
+              <p>A serverless uptime monitor for a simple question: is the service reachable right now, and will the right person know when that changes?</p>
               <ul class="project-outcomes">
                 <li><strong>Problem:</strong> Answer whether a service is reachable right now and notify the right person when that changes.</li>
                 <li><strong>Architecture:</strong> EventBridge-scheduled Lambda probes write to DynamoDB, with API Gateway, CloudFront, and SNS for access and alerts.</li>
@@ -194,6 +190,7 @@
             </a>
             <div class="project-body">
               <h3>AWS Incident Triage Pipeline</h3>
+              <p>An event-driven pipeline that turns CloudWatch alarms into readable triage notes for the first few minutes of an incident.</p>
               <ul class="project-outcomes">
                 <li><strong>Problem:</strong> CloudWatch alarms need clear first-response context before a responder starts digging through logs.</li>
                 <li><strong>Architecture:</strong> SNS-triggered Lambda pipeline summarizes severity, likely cause, immediate actions, and escalation context.</li>
