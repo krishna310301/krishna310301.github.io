@@ -79,7 +79,7 @@ h1 {
   font-size: 3.5rem;
   font-weight: 300;
   line-height: 1.07;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .status {
@@ -199,8 +199,8 @@ h1 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 36px;
-  padding: 8px 14px;
+  min-height: 40px;
+  padding: 9px 15px;
   font-family: var(--mono);
   font-size: 0.76rem;
   font-weight: 500;
@@ -228,6 +228,43 @@ h1 {
   background: var(--accent);
   border-color: var(--accent);
   color: #fff;
+}
+
+.signal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.signal-item {
+  padding: 18px 22px 19px;
+  border-left: 1px solid var(--line);
+}
+
+.signal-item:first-child {
+  border-left: 0;
+  padding-left: 0;
+}
+
+.signal-item span {
+  display: block;
+  margin-bottom: 7px;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.signal-item strong {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--ink);
 }
 
 /* ---------- nav ---------- */
@@ -265,7 +302,7 @@ h2 {
   font-size: 2rem;
   font-weight: 300;
   line-height: 1.2;
-  letter-spacing: -0.015em;
+  letter-spacing: 0;
 }
 
 .section > p {
@@ -663,6 +700,21 @@ h2 {
 
   .nav a {
     letter-spacing: 0.12em;
+  }
+
+  .signal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .signal-item {
+    padding: 15px 0;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .signal-item:first-child {
+    border-top: 0;
+    padding-left: 0;
   }
 
   .skill-row {
