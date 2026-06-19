@@ -733,3 +733,246 @@ h2 {
   align-items: center;
   gap: 16px;
 }
+
+/* ── portfolio easter eggs ── */
+.pe-about-trigger {
+  margin: 0 0 0 0.28rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--faint);
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1;
+  opacity: 0.68;
+  vertical-align: middle;
+  transition: color 0.18s ease, opacity 0.18s ease;
+}
+
+.pe-about-trigger:hover,
+.pe-about-trigger:focus-visible {
+  color: var(--pe-accent, #1D9E75);
+  opacity: 1;
+}
+
+.pe-bio-copy {
+  transition: opacity 0.2s ease;
+}
+
+.pe-bio-copy.pe-bio-fade {
+  opacity: 0;
+}
+
+.pe-terminal {
+  margin-top: 0;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  background: #0f1113;
+  border-radius: 9px;
+  color: #8ee6b4;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 1.6;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.pe-terminal[hidden] {
+  display: none;
+}
+
+.pe-terminal-visible {
+  opacity: 1;
+}
+
+.pe-terminal-dots {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 0.9rem;
+}
+
+.pe-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  flex: none;
+  border-radius: 50%;
+}
+
+.pe-dot-red {
+  background: #ff8b7e;
+}
+
+.pe-dot-amber {
+  background: #f5c56b;
+}
+
+.pe-dot-green {
+  background: #8ee6b4;
+}
+
+.pe-terminal-output {
+  margin: 0;
+  overflow-x: auto;
+  color: #8ee6b4;
+  font: inherit;
+  line-height: 1.6;
+  white-space: pre;
+}
+
+.pe-token-cmd {
+  color: #65d6df;
+}
+
+.pe-token-key {
+  color: #748189;
+}
+
+.pe-token-value {
+  color: #8ee6b4;
+}
+
+.pe-token-event {
+  color: #f5c56b;
+}
+
+.pe-terminal-cursor {
+  display: inline-block;
+  width: 0.58em;
+  height: 1em;
+  margin-left: 3px;
+  background: #8ee6b4;
+  vertical-align: -0.14em;
+  animation: pe-cursor-blink 1s steps(2, start) infinite;
+}
+
+.pe-terminal-cursor[hidden] {
+  display: none;
+}
+
+.pe-restore-bio {
+  display: inline-block;
+  margin-top: 0.85rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #748189;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.76rem;
+  transition: color 0.18s ease;
+}
+
+.pe-restore-bio:hover,
+.pe-restore-bio:focus-visible {
+  color: #f5c56b;
+}
+
+.pe-restore-bio[hidden] {
+  display: none;
+}
+
+.pe-incident-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background: rgba(0, 0, 0, 0.75);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.pe-incident-overlay[hidden] {
+  display: none;
+}
+
+.pe-incident-open {
+  opacity: 1;
+}
+
+.pe-incident-card {
+  width: min(100%, 480px);
+  max-height: calc(100vh - 2.5rem);
+  overflow: auto;
+  padding: 2rem;
+  background: #0f1113;
+  border: 1px solid var(--pe-accent, #1D9E75);
+  border-radius: 9px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  color: #8ee6b4;
+  font-family: var(--mono);
+}
+
+.pe-incident-report {
+  margin: 0;
+  color: #8ee6b4;
+  font: inherit;
+  font-size: 0.76rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
+.pe-incident-line {
+  color: #8ee6b4;
+}
+
+.pe-incident-heading {
+  color: #f5c56b;
+}
+
+.pe-incident-divider {
+  color: #334044;
+}
+
+.pe-incident-close {
+  display: block;
+  margin: 1rem auto 0;
+  padding: 0.48rem 0.75rem;
+  background: transparent;
+  border: 1px solid var(--pe-accent, #1D9E75);
+  border-radius: 5px;
+  color: #f5c56b;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.76rem;
+  transition: border-color 0.18s ease, color 0.18s ease;
+}
+
+.pe-incident-close:hover,
+.pe-incident-close:focus-visible {
+  border-color: #8ee6b4;
+  color: #8ee6b4;
+}
+
+@keyframes pe-cursor-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .pe-terminal {
+    padding: 0.9rem 1rem;
+    font-size: 0.7rem;
+  }
+
+  .pe-incident-card {
+    padding: 1.25rem;
+  }
+
+  .pe-incident-report,
+  .pe-incident-close {
+    font-size: 0.66rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pe-terminal-cursor {
+    animation: none;
+  }
+}

@@ -103,6 +103,16 @@
           enough to hand off without a meeting. It&rsquo;s the kind of work I&rsquo;d pick up on a
           weekend anyway.
         </p>
+        <div id="pe-kubectl-terminal" class="pe-terminal" aria-label="kubectl describe output — interactive easter egg" hidden>
+          <div class="pe-terminal-dots" aria-hidden="true">
+            <span class="pe-dot pe-dot-red"></span>
+            <span class="pe-dot pe-dot-amber"></span>
+            <span class="pe-dot pe-dot-green"></span>
+          </div>
+          <pre class="pe-terminal-output" aria-live="polite"></pre>
+          <span class="pe-terminal-cursor" aria-hidden="true" hidden></span>
+          <button type="button" class="pe-restore-bio" hidden>&larr; restore bio</button>
+        </div>
       </section>
 
       <section id="skills" class="section">
@@ -256,6 +266,316 @@
           var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
           document.documentElement.setAttribute("data-theme", next);
           try { localStorage.setItem("theme", next); } catch (e) {}
+        });
+      })();
+    </script>
+    <!-- curious? ↑ ↑ ↓ ↓ ← → ← → b a -->
+    <script>
+      const PE_ACCENT = '#1D9E75'; // single source of truth for accent
+
+      /* ── Feature 1: Kubectl Terminal ── */ (function () {
+        const about = document.getElementById("about");
+        const terminal = document.getElementById("pe-kubectl-terminal");
+        if (!about || !terminal) return;
+
+        const heading = about.querySelector("h2");
+        const output = terminal.querySelector(".pe-terminal-output");
+        const cursor = terminal.querySelector(".pe-terminal-cursor");
+        const restore = terminal.querySelector(".pe-restore-bio");
+        const bioParagraphs = Array.prototype.filter.call(about.children, function (child) {
+          return child.tagName === "P";
+        });
+
+        if (!heading || !output || !cursor || !restore || bioParagraphs.length === 0) return;
+
+        document.documentElement.style.setProperty("--pe-accent", PE_ACCENT);
+
+        bioParagraphs.forEach(function (paragraph) {
+          paragraph.classList.add("pe-bio-copy");
+        });
+
+        const trigger = document.createElement("button");
+        trigger.type = "button";
+        trigger.className = "pe-about-trigger";
+        trigger.textContent = ">";
+        trigger.setAttribute("aria-label", "show kubectl describe output");
+        trigger.setAttribute("aria-controls", "pe-kubectl-terminal");
+        trigger.setAttribute("aria-expanded", "false");
+        heading.appendChild(document.createTextNode(" "));
+        heading.appendChild(trigger);
+
+        const lines = [
+          [{ text: "$ kubectl describe pod krishna", className: "pe-token-cmd" }],
+          [{ text: "Name:", className: "pe-token-key" }, { text: "         " }, { text: "krishna-koushik", className: "pe-token-value" }],
+          [{ text: "Namespace:", className: "pe-token-key" }, { text: "    " }, { text: "cloudops", className: "pe-token-value" }],
+          [{ text: "Node:", className: "pe-token-key" }, { text: "         " }, { text: "us-east-1a / 10.0.1.42", className: "pe-token-value" }],
+          [{ text: "Status:", className: "pe-token-key" }, { text: "       " }, { text: "Running", className: "pe-token-value" }],
+          [{ text: "Containers:", className: "pe-token-key" }],
+          [{ text: "  sre:", className: "pe-token-key" }, { text: "        " }, { text: "image=kubernetes:1.29     ready=true", className: "pe-token-value" }],
+          [{ text: "  platform:", className: "pe-token-key" }, { text: "   " }, { text: "image=terraform:1.7       ready=true", className: "pe-token-value" }],
+          [{ text: "  backend:", className: "pe-token-key" }, { text: "    " }, { text: "image=fastapi:0.111       ready=true", className: "pe-token-value" }],
+          [{ text: "  monitor:", className: "pe-token-key" }, { text: "    " }, { text: "image=lambda:nodejs20.x   ready=true", className: "pe-token-value" }],
+          [{ text: "Readiness:", className: "pe-token-key" }, { text: "    " }, { text: "4/4 probes passing", className: "pe-token-value" }],
+          [{ text: "Events:", className: "pe-token-key" }],
+          [{ text: "  Built three projects · documented · cost-aware", className: "pe-token-event" }],
+          [{ text: "  Last deploy: CloudOps SRE Platform · canary → full · success", className: "pe-token-event" }]
+        ];
+
+        let timer = null;
+        let entries = [];
+        let index = 0;
+        let activeSpan = null;
+
+        function flattenLines() {
+          const flattened = [];
+          lines.forEach(function (line, lineIndex) {
+            line.forEach(function (token) {
+              Array.prototype.forEach.call(token.text, function (character) {
+                flattened.push({ character: character, className: token.className || "" });
+              });
+            });
+            if (lineIndex < lines.length - 1) {
+              flattened.push({ character: "\n", className: "" });
+            }
+          });
+          return flattened;
+        }
+
+        function resetTerminal() {
+          window.clearInterval(timer);
+          timer = null;
+          entries = [];
+          index = 0;
+          activeSpan = null;
+          output.textContent = "";
+          cursor.hidden = true;
+          restore.hidden = true;
+          if (!cursor.parentNode) {
+            terminal.insertBefore(cursor, restore);
+          }
+        }
+
+        function typeNextCharacter() {
+          const entry = entries[index];
+          if (!entry) {
+            window.clearInterval(timer);
+            timer = null;
+            output.appendChild(cursor);
+            cursor.hidden = false;
+            restore.hidden = false;
+            restore.focus();
+            return;
+          }
+
+          if (entry.character === "\n") {
+            output.appendChild(document.createTextNode("\n"));
+            activeSpan = null;
+          } else if (entry.className) {
+            if (!activeSpan || activeSpan.className !== entry.className) {
+              activeSpan = document.createElement("span");
+              activeSpan.className = entry.className;
+              output.appendChild(activeSpan);
+            }
+            activeSpan.textContent += entry.character;
+          } else {
+            output.appendChild(document.createTextNode(entry.character));
+            activeSpan = null;
+          }
+
+          index += 1;
+        }
+
+        function showTerminal() {
+          trigger.setAttribute("aria-expanded", "true");
+          bioParagraphs.forEach(function (paragraph) {
+            paragraph.classList.add("pe-bio-fade");
+          });
+
+          window.setTimeout(function () {
+            bioParagraphs.forEach(function (paragraph) {
+              paragraph.hidden = true;
+            });
+            terminal.hidden = false;
+            window.requestAnimationFrame(function () {
+              terminal.classList.add("pe-terminal-visible");
+            });
+            resetTerminal();
+            entries = flattenLines();
+            timer = window.setInterval(typeNextCharacter, 22);
+          }, 200);
+        }
+
+        function restoreBio() {
+          trigger.setAttribute("aria-expanded", "false");
+          resetTerminal();
+          terminal.classList.remove("pe-terminal-visible");
+
+          window.setTimeout(function () {
+            terminal.hidden = true;
+            bioParagraphs.forEach(function (paragraph) {
+              paragraph.hidden = false;
+            });
+            window.requestAnimationFrame(function () {
+              bioParagraphs.forEach(function (paragraph) {
+                paragraph.classList.remove("pe-bio-fade");
+              });
+            });
+            trigger.focus();
+          }, 200);
+        }
+
+        trigger.addEventListener("click", function () {
+          if (!terminal.hidden) return;
+          showTerminal();
+        });
+
+        restore.addEventListener("click", restoreBio);
+      })();
+
+      /* ── Feature 2: Konami P0 Modal ── */  (function () {
+        const sequence = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
+        let position = 0;
+        let overlay = null;
+        let card = null;
+        let closeButton = null;
+
+        function normalizeKey(event) {
+          return event.key.length === 1 ? event.key.toLowerCase() : event.key;
+        }
+
+        function buildModal() {
+          overlay = document.createElement("div");
+          overlay.id = "pe-incident-overlay";
+          overlay.className = "pe-incident-overlay";
+          overlay.hidden = true;
+          overlay.style.setProperty("--pe-accent", PE_ACCENT);
+
+          card = document.createElement("div");
+          card.className = "pe-incident-card";
+          card.setAttribute("role", "dialog");
+          card.setAttribute("aria-modal", "true");
+          card.setAttribute("aria-label", "P0 incident report easter egg");
+          card.tabIndex = -1;
+
+          const report = document.createElement("pre");
+          report.className = "pe-incident-report";
+          report.appendChild(reportLine("[P0] SEV-1  ·  STATUS: RESOLVED", "pe-incident-heading"));
+          report.appendChild(reportLine("────────────────────────────────", "pe-incident-divider"));
+          report.appendChild(reportLine("Incident   #INC-2024-0047"));
+          report.appendChild(reportLine("Title      Engineer caused 100% uptime"));
+          report.appendChild(reportLine("           for 365 consecutive days"));
+          report.appendChild(reportLine("────────────────────────────────", "pe-incident-divider"));
+          report.appendChild(reportLine("Impact     Zero users affected"));
+          report.appendChild(reportLine("Services   All green · 0 degraded"));
+          report.appendChild(reportLine("Duration   365d 0h 0m 0s"));
+          report.appendChild(reportLine("────────────────────────────────", "pe-incident-divider"));
+          report.appendChild(reportLine("RCA        Stayed calm at 2 AM, kept a"));
+          report.appendChild(reportLine("           clear runbook, and shipped"));
+          report.appendChild(reportLine("           things that didn't page anyone."));
+          report.appendChild(reportLine("────────────────────────────────", "pe-incident-divider"));
+          report.appendChild(reportLine("Resolution No action required."));
+          report.appendChild(reportLine("           Declared a company holiday."));
+          report.appendChild(reportLine("Responder  krishna-koushik"));
+          report.appendChild(reportLine("Runbook    Repeat."));
+          report.appendChild(reportLine("────────────────────────────────", "pe-incident-divider"));
+
+          closeButton = document.createElement("button");
+          closeButton.type = "button";
+          closeButton.className = "pe-incident-close";
+          closeButton.textContent = "[ CLOSE INCIDENT ]";
+          closeButton.setAttribute("aria-label", "Close incident");
+
+          card.appendChild(report);
+          card.appendChild(closeButton);
+          overlay.appendChild(card);
+          document.body.appendChild(overlay);
+
+          overlay.addEventListener("click", function (event) {
+            if (event.target === overlay) closeModal();
+          });
+          closeButton.addEventListener("click", closeModal);
+        }
+
+        function reportLine(text, className) {
+          const span = document.createElement("span");
+          span.className = className ? "pe-incident-line " + className : "pe-incident-line";
+          span.textContent = text + "\n";
+          return span;
+        }
+
+        function focusableElements() {
+          return Array.prototype.slice.call(card.querySelectorAll("button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])"))
+            .filter(function (element) {
+              return !element.disabled && element.offsetParent !== null;
+            });
+        }
+
+        function handleModalKeydown(event) {
+          if (!overlay || overlay.hidden) return;
+
+          if (event.key === "Escape") {
+            event.preventDefault();
+            closeModal();
+            return;
+          }
+
+          if (event.key !== "Tab") return;
+
+          const items = focusableElements();
+          if (items.length === 0) {
+            event.preventDefault();
+            card.focus();
+            return;
+          }
+
+          const first = items[0];
+          const last = items[items.length - 1];
+
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+          }
+        }
+
+        function openModal() {
+          if (!overlay) buildModal();
+          overlay.hidden = false;
+          window.requestAnimationFrame(function () {
+            overlay.classList.add("pe-incident-open");
+          });
+          document.addEventListener("keydown", handleModalKeydown);
+          closeButton.focus();
+        }
+
+        function closeModal() {
+          if (!overlay) return;
+          overlay.classList.remove("pe-incident-open");
+          window.setTimeout(function () {
+            overlay.hidden = true;
+          }, 180);
+          document.removeEventListener("keydown", handleModalKeydown);
+          document.body.setAttribute("tabindex", "-1");
+          document.body.focus();
+          document.body.removeAttribute("tabindex");
+        }
+
+        document.addEventListener("keydown", function (event) {
+          if (overlay && !overlay.hidden) return;
+
+          const key = normalizeKey(event);
+          if (key === sequence[position]) {
+            position += 1;
+            if (position === sequence.length) {
+              position = 0;
+              openModal();
+            }
+            return;
+          }
+
+          position = key === sequence[0] ? 1 : 0;
         });
       })();
     </script>
