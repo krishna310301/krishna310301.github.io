@@ -76,7 +76,8 @@
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
         <a href="#resume">Resume</a>
-        <a href="#work-experience">Work Experience</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
       </nav>
 
       <section id="about" class="section">
@@ -165,9 +166,12 @@
               <ul class="project-outcomes">
                 <li><strong>Problem:</strong> Reliability signals were scattered across service health, deployments, incident timelines, MTTR, and SLO views.</li>
                 <li><strong>Architecture:</strong> React, FastAPI, PostgreSQL/RDS, Docker, Helm, EKS, and Terraform-backed AWS infrastructure.</li>
-                <li><strong>Operational proof:</strong> Backend replicas scaled from 2 to 6 under k6 load, sustaining 2,035 requests at 99.5% success with 1.52s p95 latency.</li>
+                <li><strong>What I checked:</strong> Backend replicas scaled from 2 to 6 under k6 load, sustaining 2,035 requests at 99.5% success with 1.52s p95 latency.</li>
               </ul>
               <div class="stack"><span>React</span><span>FastAPI</span><span>PostgreSQL/RDS</span><span>Docker</span><span>EKS</span><span>Helm</span><span>Terraform</span><span>CloudWatch</span></div>
+              <div class="project-links">
+                <a href="https://github.com/krishna310301/cloudops-sre-platform" target="_blank" rel="noopener">Open repo notes</a>
+              </div>
             </div>
           </article>
 
@@ -182,9 +186,13 @@
               <ul class="project-outcomes">
                 <li><strong>Problem:</strong> Kubernetes delivery needs a repeatable promotion path, drift correction, and rollback behavior without manual cluster edits becoming the source of truth.</li>
                 <li><strong>Architecture:</strong> Argo CD, Helm, GitHub Actions, and Terraform-provisioned AWS infrastructure across VPC, EKS, ECR, IAM, and namespace-scoped environments.</li>
-                <li><strong>Operational proof:</strong> Validated three Argo CD apps as Synced/Healthy, drift self-healing after manual replica changes, and Git revert rollback after a readiness failure.</li>
+                <li><strong>What I checked:</strong> Three Argo CD apps reached Synced/Healthy on EKS, manual replica drift self-healed, and a Git revert rolled back a readiness failure.</li>
               </ul>
               <div class="stack"><span>EKS</span><span>Argo CD</span><span>Helm</span><span>Terraform</span><span>GitHub Actions</span><span>ECR</span><span>Docker</span><span>Python</span></div>
+              <div class="project-links">
+                <a href="https://github.com/krishna310301/cloudops-gitops-platform/blob/main/docs/aws-validation-results.md" target="_blank" rel="noopener">Open run notes</a>
+                <a href="https://github.com/krishna310301/cloudops-gitops-platform/tree/main/docs/screenshots" target="_blank" rel="noopener">View screenshots</a>
+              </div>
             </div>
           </article>
 
@@ -199,7 +207,7 @@
               <ul class="project-outcomes">
                 <li><strong>Problem:</strong> Answer whether a service is reachable right now and notify the right person when that changes.</li>
                 <li><strong>Architecture:</strong> EventBridge-scheduled Lambda probes write to DynamoDB, with API Gateway, CloudFront, and SNS for access and alerts.</li>
-                <li><strong>Operational proof:</strong> Current-status reads use the 10 records that matter instead of scanning 86,400 history rows.</li>
+                <li><strong>What I checked:</strong> Current-status reads use the 10 records that matter instead of scanning 86,400 history rows.</li>
               </ul>
               <div class="stack"><span>Lambda</span><span>DynamoDB</span><span>API Gateway</span><span>EventBridge</span><span>SNS</span><span>CloudFront</span><span>Terraform</span></div>
             </div>
@@ -215,8 +223,22 @@
         </a>
       </section>
 
-      <section id="work-experience" class="section">
-        <h2>Work Experience</h2>
+      <section id="experience" class="section">
+        <h2>Experience</h2>
+        <ol class="timeline">
+          <li>
+            <div class="timeline-date">Jun 2022 &ndash; Jul 2024</div>
+            <div class="timeline-content">
+              <h3>Tata Communications</h3>
+              <strong>Senior Engineer, Shift Lead</strong>
+              <p>Owned high-severity incidents on Tier-1 carrier networks: triage, RCA, vendor coordination, service restoration inside SLA, and 5-person shift leadership across 24/7 coverage.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section id="education" class="section">
+        <h2>Education</h2>
         <ol class="timeline">
           <li>
             <div class="timeline-date">Aug 2024 &ndash; May 2026</div>
@@ -224,14 +246,6 @@
               <h3>Indiana University Bloomington</h3>
               <strong>MS, Computer Science</strong>
               <p>Went deeper into the systems and cloud side of the work I&rsquo;d spent years operating.</p>
-            </div>
-          </li>
-          <li>
-            <div class="timeline-date">Jun 2022 &ndash; Jul 2024</div>
-            <div class="timeline-content">
-              <h3>Tata Communications</h3>
-              <strong>Senior Engineer, Shift Lead</strong>
-              <p>Owned high-severity incidents on Tier-1 carrier networks: triage, RCA, vendor coordination, service restoration inside SLA, and 5-person shift leadership across 24/7 coverage.</p>
             </div>
           </li>
           <li>
@@ -246,7 +260,7 @@
       </section>
 
       <footer class="site-footer">
-        <p class="foot-status"><span class="status-dot" aria-hidden="true"></span>All systems operational</p>
+        <p class="foot-status"><span class="status-dot static" aria-hidden="true"></span>Clear handoffs, fewer surprises</p>
         <div class="foot-right">
           <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle light and dark theme"></button>
           <p>&copy; 2026 Krishna Koushik Thokala</p>

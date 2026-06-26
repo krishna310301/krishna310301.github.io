@@ -454,6 +454,25 @@ h2 {
   background: #fff;
 }
 
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 12px;
+}
+
+.project-links a {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.project-links a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
 /* ---------- resume ---------- */
 .resume-section p {
   color: var(--muted);
