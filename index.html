@@ -53,6 +53,7 @@
           <p class="role">Cloud Infrastructure Engineer</p>
           <p class="tagline">I build cloud infrastructure with an operations-first mindset &mdash; because I&rsquo;ve seen what &ldquo;down&rdquo; costs.</p>
           <p class="credential">MS in Computer Science, Indiana University Bloomington</p>
+          <p class="credential">AWS Certified Solutions Architect - Associate</p>
           <div class="contact">
             <a class="email" href="mailto:krishnakoushikthokala@gmail.com">krishnakoushikthokala@gmail.com</a>
             <div class="social-links" aria-label="Profile links">
@@ -101,8 +102,7 @@
           projects are deliberately practical: an EKS reliability platform, a GitOps
           delivery platform, and a serverless uptime monitor. I care most about systems that
           are simple to operate, observable by default, cost-aware, and documented well
-          enough to hand off without a meeting. It&rsquo;s the kind of work I&rsquo;d pick up on a
-          weekend anyway.
+          enough to hand off without a meeting.
         </p>
         <div id="pe-kubectl-terminal" class="pe-terminal" aria-label="kubectl describe output — interactive easter egg" hidden>
           <div class="pe-terminal-dots" aria-hidden="true">
@@ -122,7 +122,7 @@
           <div class="skill-row">
             <div class="skill-label">Cloud &amp; AWS</div>
             <div class="skill-items">
-              <span>VPC</span><span>IAM</span><span>EC2</span><span>S3</span><span>Lambda</span><span>API Gateway</span><span>EventBridge</span><span>CloudWatch</span><span>SNS</span><span>DynamoDB</span><span>CloudFront</span><span>EKS</span><span>ECR</span><span>RDS</span><span>ALB</span><span>Secrets Manager</span>
+              <span>VPC</span><span>IAM</span><span>EC2</span><span>S3</span><span>Lambda</span><span>API Gateway</span><span>EventBridge</span><span>CloudWatch</span><span>SNS</span><span>DynamoDB</span><span>CloudFront</span><span>EKS</span><span>ECR</span><span>RDS</span><span>ALB</span><span>Secrets Manager</span><span>AWS Budgets</span><span>KMS</span>
             </div>
           </div>
           <div class="skill-row">
@@ -134,7 +134,7 @@
           <div class="skill-row">
             <div class="skill-label">Observability &amp; SRE</div>
             <div class="skill-items">
-              <span>CloudWatch Logs</span><span>Metrics</span><span>Alarms</span><span>Incident Response</span><span>RCA</span><span>Runbooks</span><span>SLA Troubleshooting</span><span>MTTR</span><span>SLO Metrics</span>
+              <span>CloudWatch Logs</span><span>Prometheus</span><span>Grafana</span><span>Metrics</span><span>Alarms</span><span>Incident Response</span><span>RCA</span><span>Runbooks</span><span>SLA Troubleshooting</span><span>MTTR</span><span>SLO Metrics</span>
             </div>
           </div>
           <div class="skill-row">
@@ -156,6 +156,27 @@
         <h2>Projects</h2>
         <div class="project-list">
           <article class="project">
+            <a class="project-preview" href="https://github.com/krishna310301/cloudops-gitops-platform" target="_blank" rel="noopener">
+              <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><em>krishna310301/cloudops-gitops-platform</em><span class="frame-status"><span class="sdot"></span>source</span></div>
+              <img src="assets/cloudops-gitops-platform.png" alt="CloudOps GitOps Platform four Argo CD applications" />
+            </a>
+            <div class="project-body">
+              <h3>CloudOps GitOps Platform</h3>
+              <p>A GitOps delivery platform for controlling how Kubernetes changes move through dev, staging, and prod on Amazon EKS.</p>
+              <ul class="project-outcomes">
+                <li><strong>Problem:</strong> Kubernetes delivery needs repeatable promotion, drift correction, rollback behavior, and workload visibility without manual cluster edits becoming the source of truth.</li>
+                <li><strong>Architecture:</strong> Argo CD, Helm, GitHub Actions, ECR, Prometheus, Grafana, AWS Budgets, and Terraform-provisioned AWS infrastructure across VPC, EKS, ECR, IAM, and namespace-scoped environments.</li>
+                <li><strong>What I checked:</strong> Four Argo CD apps reached Synced/Healthy on EKS; Prometheus scraped app metrics across dev/staging/prod; Grafana showed workload health; Terraform created and destroyed 20 AWS resources with ECR, AWS Budget, drift self-healing, and Git revert rollback validated.</li>
+              </ul>
+              <div class="stack"><span>EKS</span><span>Argo CD</span><span>Helm</span><span>Terraform</span><span>GitHub Actions</span><span>ECR</span><span>Prometheus</span><span>Grafana</span><span>AWS Budgets</span><span>Docker</span><span>Kubernetes</span><span>RBAC</span></div>
+              <div class="project-links">
+                <a href="https://github.com/krishna310301/cloudops-gitops-platform/blob/main/docs/aws-validation-results.md" target="_blank" rel="noopener">Open run notes</a>
+                <a href="https://github.com/krishna310301/cloudops-gitops-platform/tree/main/docs/screenshots" target="_blank" rel="noopener">View screenshots</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project">
             <a class="project-preview" href="https://github.com/krishna310301/cloudops-sre-platform" target="_blank" rel="noopener">
               <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><em>krishna310301/cloudops-sre-platform</em><span class="frame-status"><span class="sdot"></span>source</span></div>
               <img src="assets/cloudops-sre-platform.png" alt="CloudOps SRE Platform dashboard" />
@@ -171,27 +192,6 @@
               <div class="stack"><span>React</span><span>FastAPI</span><span>PostgreSQL/RDS</span><span>Docker</span><span>EKS</span><span>Helm</span><span>Terraform</span><span>CloudWatch</span></div>
               <div class="project-links">
                 <a href="https://github.com/krishna310301/cloudops-sre-platform" target="_blank" rel="noopener">Open repo notes</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="project">
-            <a class="project-preview" href="https://github.com/krishna310301/cloudops-gitops-platform" target="_blank" rel="noopener">
-              <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><em>krishna310301/cloudops-gitops-platform</em><span class="frame-status"><span class="sdot"></span>source</span></div>
-              <img src="assets/cloudops-gitops-platform.png" alt="CloudOps GitOps Platform Argo CD applications" />
-            </a>
-            <div class="project-body">
-              <h3>CloudOps GitOps Platform</h3>
-              <p>A GitOps delivery platform built around one idea: Git should be the source of truth for how a version moves through dev, staging, and prod.</p>
-              <ul class="project-outcomes">
-                <li><strong>Problem:</strong> Kubernetes delivery needs a repeatable promotion path, drift correction, and rollback behavior without manual cluster edits becoming the source of truth.</li>
-                <li><strong>Architecture:</strong> Argo CD, Helm, GitHub Actions, and Terraform-provisioned AWS infrastructure across VPC, EKS, ECR, IAM, and namespace-scoped environments.</li>
-                <li><strong>What I checked:</strong> Three Argo CD apps reached Synced/Healthy on EKS, manual replica drift self-healed, and a Git revert rolled back a readiness failure.</li>
-              </ul>
-              <div class="stack"><span>EKS</span><span>Argo CD</span><span>Helm</span><span>Terraform</span><span>GitHub Actions</span><span>ECR</span><span>Docker</span><span>Python</span></div>
-              <div class="project-links">
-                <a href="https://github.com/krishna310301/cloudops-gitops-platform/blob/main/docs/aws-validation-results.md" target="_blank" rel="noopener">Open run notes</a>
-                <a href="https://github.com/krishna310301/cloudops-gitops-platform/tree/main/docs/screenshots" target="_blank" rel="noopener">View screenshots</a>
               </div>
             </div>
           </article>
