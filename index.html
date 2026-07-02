@@ -166,7 +166,7 @@
               <ul class="project-outcomes">
                 <li><strong>Problem:</strong> Kubernetes delivery needs repeatable promotion, drift correction, rollback behavior, and workload visibility without manual cluster edits becoming the source of truth.</li>
                 <li><strong>Architecture:</strong> Argo CD, Helm, GitHub Actions, ECR, Prometheus, Grafana, AWS Budgets, and Terraform-provisioned AWS infrastructure across VPC, EKS, ECR, IAM, and namespace-scoped environments.</li>
-                <li><strong>What I checked:</strong> Four Argo CD apps reached Synced/Healthy on EKS; Prometheus scraped app metrics across dev/staging/prod; Grafana showed workload health; Terraform created and destroyed 20 AWS resources with ECR, AWS Budget, drift self-healing, and Git revert rollback validated.</li>
+                <li><strong>What I checked:</strong> Four Argo CD apps reached Synced/Healthy on EKS; Prometheus scraped app metrics across dev/staging/prod; Grafana showed workload health; Terraform created and destroyed 20 AWS resources; drift self-healing, ECR promotion, AWS Budget creation, and Git revert rollback were validated.</li>
               </ul>
               <div class="stack"><span>EKS</span><span>Argo CD</span><span>Helm</span><span>Terraform</span><span>GitHub Actions</span><span>ECR</span><span>Prometheus</span><span>Grafana</span><span>AWS Budgets</span><span>Docker</span><span>Kubernetes</span><span>RBAC</span></div>
               <div class="project-links">
@@ -186,7 +186,7 @@
               <p>An EKS reliability dashboard for the operational view I always wanted: service health, deployments, incident timelines, MTTR, and SLO views in one place.</p>
               <ul class="project-outcomes">
                 <li><strong>Problem:</strong> Reliability signals were scattered across service health, deployments, incident timelines, MTTR, and SLO views.</li>
-                <li><strong>Architecture:</strong> React, FastAPI, PostgreSQL/RDS, Docker, Helm, EKS, and Terraform-backed AWS infrastructure.</li>
+                <li><strong>Architecture:</strong> React, FastAPI, PostgreSQL/RDS, Docker, Helm, ALB Ingress, EKS, CloudWatch, and Terraform-backed AWS infrastructure.</li>
                 <li><strong>What I checked:</strong> Backend replicas scaled from 2 to 6 under k6 load, sustaining 2,035 requests at 99.5% success with 1.52s p95 latency.</li>
               </ul>
               <div class="stack"><span>React</span><span>FastAPI</span><span>PostgreSQL/RDS</span><span>Docker</span><span>EKS</span><span>Helm</span><span>Terraform</span><span>CloudWatch</span></div>
@@ -207,7 +207,7 @@
               <ul class="project-outcomes">
                 <li><strong>Problem:</strong> Answer whether a service is reachable right now and notify the right person when that changes.</li>
                 <li><strong>Architecture:</strong> EventBridge-scheduled Lambda probes write to DynamoDB, with API Gateway, CloudFront, and SNS for access and alerts.</li>
-                <li><strong>What I checked:</strong> Current-status reads use the 10 records that matter instead of scanning 86,400 history rows.</li>
+                <li><strong>What I checked:</strong> Current-status reads use the 10 records that matter instead of scanning 86,400 history rows, with 9 custom CloudWatch metrics published for operational visibility.</li>
               </ul>
               <div class="stack"><span>Lambda</span><span>DynamoDB</span><span>API Gateway</span><span>EventBridge</span><span>SNS</span><span>CloudFront</span><span>Terraform</span></div>
             </div>
