@@ -51,7 +51,7 @@
           <p class="status"><span class="status-dot static" aria-hidden="true"></span>Operations-first cloud infrastructure</p>
           <h1>Krishna Koushik Thokala</h1>
           <p class="role">Cloud Infrastructure Engineer</p>
-          <p class="tagline">I build cloud infrastructure with an operations-first mindset &mdash; because I&rsquo;ve seen what &ldquo;down&rdquo; costs.</p>
+          <p class="tagline">I build cloud infrastructure with an operations-first, security-aware mindset because I&rsquo;ve seen what &ldquo;down&rdquo; costs.</p>
           <p class="credential">MS in Computer Science, Indiana University Bloomington</p>
           <p class="credential">AWS Certified Solutions Architect - Associate</p>
           <div class="contact">
@@ -99,10 +99,10 @@
         <p>
           I recently finished my MS in Computer Science at Indiana University Bloomington,
           and I build cloud infrastructure now with that same operations-first instinct. My
-          projects are deliberately practical: an EKS reliability platform, a GitOps
-          delivery platform, and a serverless uptime monitor. I care most about systems that
-          are simple to operate, observable by default, cost-aware, and documented well
-          enough to hand off without a meeting.
+          projects are practical by design: an EKS reliability platform, a GitOps delivery
+          platform, and a serverless uptime monitor. I care most about systems that are
+          observable by default, secured through least-privilege access, recoverable during
+          failure, cost-aware, and documented well enough to hand off without a meeting.
         </p>
         <div id="pe-kubectl-terminal" class="pe-terminal" aria-label="kubectl describe output — interactive easter egg" hidden>
           <div class="pe-terminal-dots" aria-hidden="true">
@@ -123,6 +123,12 @@
             <div class="skill-label">Cloud &amp; AWS</div>
             <div class="skill-items">
               <span>VPC</span><span>IAM</span><span>EC2</span><span>S3</span><span>Lambda</span><span>API Gateway</span><span>EventBridge</span><span>CloudWatch</span><span>SNS</span><span>DynamoDB</span><span>CloudFront</span><span>EKS</span><span>ECR</span><span>RDS</span><span>ALB</span><span>Secrets Manager</span><span>AWS Budgets</span><span>KMS</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-label">Cloud Security</div>
+            <div class="skill-items">
+              <span>IAM</span><span>OIDC</span><span>IRSA</span><span>RBAC</span><span>NetworkPolicies</span><span>Secrets Manager</span><span>KMS</span><span>Security Groups</span><span>API Keys</span><span>CORS</span><span>SSRF Protection</span><span>Checkov</span><span>Bandit</span>
             </div>
           </div>
           <div class="skill-row">
@@ -165,7 +171,7 @@
               <p>A GitOps delivery platform for controlling how Kubernetes changes move through dev, staging, and prod on Amazon EKS.</p>
               <ul class="project-outcomes">
                 <li><strong>Problem:</strong> Kubernetes delivery needs repeatable promotion, drift correction, rollback behavior, and workload visibility without manual cluster edits becoming the source of truth.</li>
-                <li><strong>Architecture:</strong> Argo CD, Helm, GitHub Actions, ECR, Prometheus, Grafana, AWS Budgets, and Terraform-provisioned AWS infrastructure across VPC, EKS, ECR, IAM, and namespace-scoped environments.</li>
+                <li><strong>Architecture:</strong> Argo CD, Helm, GitHub Actions, ECR, Prometheus/Grafana, AWS Budgets, and Terraform-provisioned AWS infrastructure across VPC, EKS, ECR, IAM, namespace-scoped environments, RBAC, NetworkPolicies, and restricted pod security settings.</li>
                 <li><strong>What I checked:</strong> Four Argo CD apps reached Synced/Healthy on EKS; Prometheus scraped app metrics across dev/staging/prod; Grafana showed workload health; Terraform created and destroyed 20 AWS resources; drift self-healing, ECR promotion, AWS Budget creation, and Git revert rollback were validated.</li>
               </ul>
               <div class="stack"><span>EKS</span><span>Argo CD</span><span>Helm</span><span>Terraform</span><span>GitHub Actions</span><span>ECR</span><span>Prometheus</span><span>Grafana</span><span>AWS Budgets</span><span>Docker</span><span>Kubernetes</span><span>RBAC</span></div>
@@ -186,7 +192,7 @@
               <p>An EKS reliability dashboard for the operational view I always wanted: service health, deployments, incident timelines, MTTR, and SLO views in one place.</p>
               <ul class="project-outcomes">
                 <li><strong>Problem:</strong> Reliability signals were scattered across service health, deployments, incident timelines, MTTR, and SLO views.</li>
-                <li><strong>Architecture:</strong> React, FastAPI, PostgreSQL/RDS, Docker, Helm, ALB Ingress, EKS, CloudWatch, and Terraform-backed AWS infrastructure.</li>
+                <li><strong>Architecture:</strong> React, FastAPI, PostgreSQL/RDS, Docker, Helm, EKS, ALB Ingress, Secrets Manager, private RDS, security groups, CloudWatch, and Terraform-backed AWS infrastructure.</li>
                 <li><strong>What I checked:</strong> Backend replicas scaled from 2 to 6 under k6 load, sustaining 2,035 requests at 99.5% success with 1.52s p95 latency.</li>
               </ul>
               <div class="stack"><span>React</span><span>FastAPI</span><span>PostgreSQL/RDS</span><span>Docker</span><span>EKS</span><span>Helm</span><span>Terraform</span><span>CloudWatch</span></div>
@@ -206,7 +212,7 @@
               <p>A serverless uptime monitor for a simple question: is the service reachable right now, and will the right person know when that changes?</p>
               <ul class="project-outcomes">
                 <li><strong>Problem:</strong> Answer whether a service is reachable right now and notify the right person when that changes.</li>
-                <li><strong>Architecture:</strong> EventBridge-scheduled Lambda probes write to DynamoDB, with API Gateway, CloudFront, and SNS for access and alerts.</li>
+                <li><strong>Architecture:</strong> EventBridge-scheduled Lambda probes write to DynamoDB, with API Gateway, CloudFront, SNS, API keys, throttling, restricted CORS, KMS, DLQs, and SSRF protection for safer URL intake.</li>
                 <li><strong>What I checked:</strong> Current-status reads use the 10 records that matter instead of scanning 86,400 history rows, with 9 custom CloudWatch metrics published for operational visibility.</li>
               </ul>
               <div class="stack"><span>Lambda</span><span>DynamoDB</span><span>API Gateway</span><span>EventBridge</span><span>SNS</span><span>CloudFront</span><span>Terraform</span></div>
