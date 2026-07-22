@@ -427,7 +427,7 @@ h2 {
   white-space: nowrap;
 }
 
-.project-metrics span + span::before {
+.project-metrics span:not(:last-child)::after {
   content: "\00B7";
   margin: 0 10px;
   color: var(--faint);
