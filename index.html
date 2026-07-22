@@ -169,11 +169,13 @@
             </a>
             <div class="project-body">
               <h3>CloudOps GitOps Platform</h3>
+              <div class="project-tags">GitOps · Security · AWS-validated</div>
               <p>A GitOps delivery platform for controlling how Kubernetes changes move through dev, staging, and prod on Amazon EKS.</p>
+              <div class="project-metrics"><span>4/4 apps Synced &amp; Healthy</span><span>20 AWS resources created + destroyed</span><span>drift self-healing + Git-revert rollback</span></div>
               <ul class="project-outcomes">
                 <li><strong>Problem:</strong> Kubernetes delivery needs repeatable promotion, drift correction, rollback behavior, and workload visibility without manual cluster edits becoming the source of truth.</li>
                 <li><strong>Architecture:</strong> Argo CD, Helm, GitHub Actions, ECR, Prometheus/Grafana, AWS Budgets, and Terraform-provisioned AWS infrastructure across VPC, EKS, ECR, IAM, namespace-scoped environments, RBAC, NetworkPolicies, and restricted pod security settings. GitHub Actions publishes immutable commit-SHA image tags, while Terraform defines repository-scoped GitHub OIDC access to ECR without long-lived AWS credentials.</li>
-                <li><strong>What I checked:</strong> Four Argo CD apps reached Synced/Healthy on EKS; Prometheus scraped app metrics across dev/staging/prod; Grafana showed workload health; Terraform created and destroyed 20 AWS resources; drift self-healing, ECR promotion, AWS Budget creation, and Git revert rollback were validated.</li>
+                <li><strong>What I checked:</strong> Ran end to end on live EKS &mdash; Prometheus scraped metrics across dev/staging/prod, Grafana showed workload health, and ECR promotion plus AWS Budget creation were confirmed before teardown.</li>
               </ul>
               <div class="stack"><span>EKS</span><span>Argo CD</span><span>Helm</span><span>Terraform</span><span>GitHub Actions</span><span>ECR</span><span>Prometheus</span><span>Grafana</span><span>AWS Budgets</span><span>Docker</span><span>Kubernetes</span><span>RBAC</span></div>
               <div class="project-links">
@@ -191,11 +193,13 @@
             </a>
             <div class="project-body">
               <h3>CloudOps SRE Platform</h3>
+              <div class="project-tags">SRE · EKS · AWS-validated</div>
               <p>An EKS operations platform connecting service health, deployment history, incident timelines, MTTR, and simplified error-budget views.</p>
+              <div class="project-metrics"><span>2 &rarr; 6 replicas under k6 load</span><span>2,035 requests</span><span>99.5% success</span><span>1.52s p95</span></div>
               <ul class="project-outcomes">
                 <li><strong>Problem:</strong> Teams need service health, deployment, and incident context in one operational view during troubleshooting.</li>
                 <li><strong>Architecture:</strong> React, FastAPI, PostgreSQL/RDS, Docker, Helm, EKS, ALB Ingress, Secrets Manager, private RDS, security groups, CloudWatch, and Terraform-backed AWS infrastructure.</li>
-                <li><strong>What I checked:</strong> Backend replicas scaled from 2 to 6 under k6 load, sustaining 2,035 requests at 99.5% success with 1.52s p95 latency.</li>
+                <li><strong>What I checked:</strong> Load-tested with k6 &mdash; the backend autoscaled and stayed healthy under sustained traffic.</li>
               </ul>
               <div class="stack"><span>React</span><span>FastAPI</span><span>PostgreSQL/RDS</span><span>Docker</span><span>EKS</span><span>Helm</span><span>Terraform</span><span>CloudWatch</span></div>
               <div class="project-links">
@@ -213,11 +217,13 @@
             </a>
             <div class="project-body">
               <h3>CloudOps Uptime Monitor</h3>
+              <div class="project-tags">Serverless · Live</div>
               <p>A serverless uptime monitor for a simple question: is the service reachable right now, and will the right person know when that changes?</p>
+              <div class="project-metrics"><span>failure detected in 1s</span><span>DOWN shown in 26s</span><span>duplicate alerts suppressed</span></div>
               <ul class="project-outcomes">
                 <li><strong>Problem:</strong> Answer whether a service is reachable right now and notify the right person when that changes.</li>
                 <li><strong>Architecture:</strong> EventBridge-scheduled Lambda probes write to DynamoDB, with API Gateway, CloudFront, SNS, API keys, throttling, restricted CORS, KMS, DLQs, and SSRF protection for safer URL intake.</li>
-                <li><strong>What I checked:</strong> A controlled outage drill detected failure in 1 second, showed the DOWN state within 26 seconds, suppressed duplicate downtime alerts, and confirmed recovery. The live API now enforces key-based throttling, a 10,000-request daily quota, and read-only behavior.</li>
+                <li><strong>What I checked:</strong> A controlled outage drill confirmed recovery, and the live API enforces key-based throttling, a 10,000-request daily quota, and read-only access.</li>
               </ul>
               <div class="stack"><span>Lambda</span><span>DynamoDB</span><span>API Gateway</span><span>EventBridge</span><span>SNS</span><span>CloudFront</span><span>Terraform</span></div>
               <div class="project-links">
@@ -234,7 +240,7 @@
         <h2>Resume</h2>
         <p>A one-page version &mdash; easy to skim or share.</p>
         <a class="resume-link" href="assets/Krishna_Koushik_Resume.pdf">
-          <span class="arrow" aria-hidden="true">&darr;</span> Krishna_Koushik_Resume.pdf
+          <span class="arrow" aria-hidden="true">&darr;</span> Download one-page r&eacute;sum&eacute; (PDF)
         </a>
       </section>
 
