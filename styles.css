@@ -133,6 +133,32 @@ h1 {
   color: var(--muted);
 }
 
+.hero-proof {
+  margin: 0 0 12px;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin: 0 0 20px;
+}
+
+.hero-actions a {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  border-bottom: 1px solid transparent;
+}
+
+.hero-actions a:hover {
+  color: var(--accent-strong);
+  border-bottom-color: var(--accent-strong);
+}
+
 .contact {
   display: flex;
   align-items: center;
