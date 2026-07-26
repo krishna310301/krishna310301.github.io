@@ -215,39 +215,38 @@
 
       <section id="skills" class="section reading-container">
         <h2>Skills</h2>
-        <p class="section-lede">Five things I can do, and where each one is demonstrated. Every number below points to an artifact committed in a public repository.</p>
-        <div class="capabilities">
-
-          <article class="capability">
-            <h3>Provision and decommission AWS infrastructure with Terraform</h3>
-            <p class="capability-proof">A <strong>59-resource</strong> EKS foundation from a 54-create plan &mdash; tiered VPC, managed node group, RDS, ECR, Secrets Manager, IAM &mdash; plus a <strong>53-resource</strong> serverless stack and a third platform composed as <strong>15 reusable modules</strong>. Teardown matters as much as build: one environment was destroyed 54 minutes after apply with closure confirmed across 14 checks.</p>
-            <div class="capability-tools"><span>Terraform</span><span>VPC</span><span>Subnets</span><span>NAT Gateway</span><span>EC2</span><span>EKS</span><span>ECR</span><span>RDS</span><span>Lambda</span><span>API Gateway</span><span>DynamoDB</span><span>S3</span><span>CloudFront</span><span>SNS</span><span>SQS</span><span>EventBridge</span></div>
-          </article>
-
-          <article class="capability">
-            <h3>Make reliability measurable, then test the measurement</h3>
-            <p class="capability-proof">Availability and latency SLIs defined as <strong>6 Prometheus recording rules</strong> scoped to user-facing routes, excluding health, metrics, and load-generation traffic so synthetic load cannot inflate the number. Multi-window burn-rate alerting at <strong>14.4&times; and 6&times;</strong> against a 99.9% target, with the rules themselves covered by <strong>5 promtool test cases</strong>.</p>
-            <div class="capability-tools"><span>Prometheus</span><span>Grafana</span><span>CloudWatch</span><span>Recording rules</span><span>SLIs</span><span>Error budgets</span><span>Burn-rate alerting</span><span>HPA</span><span>k6</span><span>X-Ray</span></div>
-          </article>
-
-          <article class="capability">
-            <h3>Ship changes through a delivery path that can refuse them</h3>
-            <p class="capability-proof">A <strong>four-gate promotion pipeline</strong> that rejects any tag that is not a verified 12-character commit SHA, confirms the commit exists in Git and the image exists in ECR, authenticates through branch-scoped OIDC with no stored credentials, and lands every promotion as a reviewable pull request. Drift self-healing and Git-revert rollback validated on a live cluster.</p>
-            <div class="capability-tools"><span>Argo CD</span><span>GitOps</span><span>Helm</span><span>Kubernetes</span><span>Docker</span><span>GitHub Actions</span><span>CI/CD</span><span>Checkov</span><span>kubeconform</span></div>
-          </article>
-
-          <article class="capability">
-            <h3>Scope access and contain blast radius</h3>
-            <p class="capability-proof">IRSA for pod-level AWS identity, per-namespace RBAC and ResourceQuotas, NetworkPolicies, non-root pod security contexts, and customer-managed KMS keys across DynamoDB, SQS, and S3. User-submitted input is treated as hostile: SSRF defence rejects private and EC2 metadata addresses and <strong>revalidates after DNS resolution</strong> before following redirects.</p>
-            <div class="capability-tools"><span>IAM</span><span>IRSA</span><span>OIDC federation</span><span>RBAC</span><span>NetworkPolicies</span><span>ResourceQuotas</span><span>Pod Security</span><span>KMS</span><span>Secrets Manager</span></div>
-          </article>
-
-          <article class="capability">
-            <h3>Operate production infrastructure under an SLA</h3>
-            <p class="capability-proof">Two years leading <strong>5-engineer shifts</strong> in a 24/7 carrier-grade NOC, owning <strong>40+ daily priority incidents</strong> across 25&ndash;30 Tier-1 clients on global ILL, DWDM, and submarine cable infrastructure. Fault isolation across Juniper, Huawei, Ciena, and Alcatel platforms, vendor TAC coordination, and RCAs written so the next engineer on shift did not start over.</p>
-            <div class="capability-tools"><span>BGP</span><span>MPLS</span><span>DWDM</span><span>TCP/IP</span><span>DNS</span><span>Routing</span><span>Load balancing</span><span>Firewalls</span><span>ServiceNow</span><span>Linux</span><span>Python</span><span>Bash</span><span>SQL</span></div>
-          </article>
-
+        <p class="section-lede">I pick up tools by building something real with them, then trying to break it. This is what I&rsquo;ve actually shipped &mdash; the projects above are where the detail lives.</p>
+        <div class="skills-list">
+          <div class="skill-row">
+            <div class="skill-label">AWS</div>
+            <div class="skill-items">
+              <span>EC2</span><span>VPC</span><span>EKS</span><span>ECR</span><span>Lambda</span><span>API Gateway</span><span>RDS</span><span>DynamoDB</span><span>S3</span><span>CloudFront</span><span>SNS</span><span>EventBridge</span><span>KMS</span><span>Secrets Manager</span><span>IAM</span><span>CloudWatch</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-label">Infrastructure &amp; delivery</div>
+            <div class="skill-items">
+              <span>Terraform</span><span>Kubernetes</span><span>Helm</span><span>Argo CD</span><span>Docker</span><span>GitHub Actions</span><span>Checkov</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-label">Observability &amp; reliability</div>
+            <div class="skill-items">
+              <span>Prometheus</span><span>Grafana</span><span>CloudWatch</span><span>SLIs</span><span>Burn-rate alerting</span><span>HPA</span><span>k6</span><span>Incident response</span><span>RCA</span><span>Runbooks</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-label">Languages &amp; systems</div>
+            <div class="skill-items">
+              <span>Python</span><span>Bash</span><span>SQL</span><span>PostgreSQL</span><span>Linux</span><span>Git</span><span>FastAPI</span><span>React</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-label">From the network side</div>
+            <div class="skill-items">
+              <span>BGP</span><span>MPLS</span><span>DWDM</span><span>TCP/IP</span><span>DNS</span><span>Routing</span><span>Firewalls</span><span>ServiceNow</span>
+            </div>
+          </div>
         </div>
       </section>
 
