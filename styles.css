@@ -509,7 +509,8 @@ h2 {
 .project-outcomes li {
   position: relative;
   padding-left: 15px;
-  color: var(--ink);
+  color: var(--muted);
+  font-size: 0.94rem;
   line-height: 1.55;
 }
 
@@ -525,7 +526,8 @@ h2 {
 }
 
 .project-outcomes strong {
-  font-weight: 600;
+  font-weight: 500;
+  color: var(--ink);
 }
 
 .stack {
@@ -824,6 +826,86 @@ h2 {
   .container {
     animation: none !important;
     transition: none !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .project-outcomes li {
+    font-size: 0.9rem;
+  }
+}
+
+/* ---------- capabilities (skills) ---------- */
+/* Replaces the flat tag-cloud. Each block states a capability, backs it with a
+   specific number, then lists the tools underneath as supporting detail. */
+.section-lede {
+  margin: -2px 0 28px;
+  max-width: 66ch;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.62;
+}
+
+.capabilities {
+  display: grid;
+  gap: 24px;
+}
+
+.capability {
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.capability:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.capability h3 {
+  margin: 0 0 9px;
+  font-size: 1.06rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.capability-proof {
+  margin: 0 0 13px;
+  max-width: 68ch;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.62;
+}
+
+.capability-proof strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.capability-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 0;
+}
+
+.capability-tools span {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--faint);
+}
+
+.capability-tools span + span::before {
+  content: "/";
+  margin: 0 8px;
+  color: var(--line-strong);
+}
+
+@media (max-width: 720px) {
+  .capability h3 {
+    font-size: 1rem;
+  }
+  .capability-proof {
+    font-size: 0.92rem;
   }
 }
 

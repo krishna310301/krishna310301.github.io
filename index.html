@@ -99,7 +99,7 @@
           It also changed how I think about systems. Once you&rsquo;ve handled a high-severity incident at 2 AM, reliability stops being an abstract requirement. I don&rsquo;t want to only react to failures; I want to build infrastructure so there are fewer of them&mdash;and so the next engineer on shift has the visibility, documentation, and recovery path they need.
         </p>
         <p>
-          After completing my MS in Computer Science at Indiana University Bloomington, I began applying that same operations-first mindset to cloud infrastructure. My projects include an EKS reliability platform, a GitOps delivery platform, and a serverless uptime monitor. I build with observability, least-privilege access, recovery, cost awareness, and clear handoffs in mind&mdash;not as extras, but as part of the system from the beginning.
+          During and after my MS in Computer Science at Indiana University Bloomington, I applied that same operations-first mindset to cloud infrastructure. My projects include an EKS reliability platform, a GitOps delivery platform, and a serverless uptime monitor. I build with observability, least-privilege access, recovery, cost awareness, and clear handoffs in mind&mdash;not as extras, but as part of the system from the beginning.
         </p>
         <div id="pe-kubectl-terminal" class="pe-terminal" aria-label="kubectl describe output — interactive easter egg" hidden>
           <div class="pe-terminal-dots" aria-hidden="true">
@@ -118,17 +118,47 @@
         <div class="project-list">
           <article class="project">
             <div class="project-preview">
+              <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><em>krishna310301/cloudops-sre-platform</em><span class="frame-status"><span class="sdot"></span>source</span></div>
+              <img src="assets/cloudops-sre-platform.png" alt="EKS Reliability Platform dashboard showing service health, deployments, and incident timelines" />
+            </div>
+            <div class="project-body">
+              <p class="project-name">EKS Reliability Platform</p>
+              <div class="project-tags">SRE &middot; EKS &middot; OBSERVABILITY</div>
+              <h3>Measuring reliability the way users experience it, then proving the measurement</h3>
+              <p>Built an AWS reliability platform that connects application health, Kubernetes deployments, scaling behaviour, alerts, and incident context in one operational workflow &mdash; then validated it against published evidence rather than screenshots.</p>
+              <p>Terraform provisions a 59-resource foundation across a tiered VPC, EKS, RDS PostgreSQL, ECR, Secrets Manager, and CloudWatch. Prometheus recording rules define availability and latency indicators, and every figure below is traceable to an artifact committed in the repository.</p>
+              <ul class="project-outcomes">
+                <li>Availability SLIs scoped to user-facing routes, excluding health, metrics, and load-generation traffic, and counting only 5xx as failure so client validation errors are not recorded as downtime</li>
+                <li>Multi-window multi-burn-rate error-budget alerting against a 99.9% target &mdash; 14.4&times; fast burn paging, 6&times; slow burn ticketing &mdash; verified by 5 promtool test cases</li>
+                <li>Environment destroyed 54 minutes after apply, with closure confirmed across 14 checks and one tagging check recorded as inconclusive rather than passed</li>
+              </ul>
+              <div class="project-metrics"><span>2 &rarr; 6 replicas</span><span>18,819 requests</span><span>0 failed requests</span></div>
+              <div class="stack"><span>Amazon EKS</span><span>Terraform</span><span>Helm</span><span>Prometheus</span><span>CloudWatch</span><span>k6</span><span>RDS</span></div>
+              <div class="project-links">
+                <a href="https://github.com/krishna310301/cloudops-sre-platform/tree/main/docs/evidence/aws-validation-2026-07-25" target="_blank" rel="noopener noreferrer">View validation evidence &rarr;</a>
+                <a href="https://github.com/krishna310301/cloudops-sre-platform" target="_blank" rel="noopener noreferrer">Source code &#8599;</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-preview">
               <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><em>krishna310301/cloudops-gitops-platform</em><span class="frame-status"><span class="sdot"></span>source</span></div>
               <img class="gitops-preview-image" src="assets/cloudops-gitops-platform.png" alt="Four Argo CD applications showing Synced and Healthy status on Amazon EKS" />
             </div>
             <div class="project-body">
-              <p class="project-name">CloudOps GitOps Platform</p>
-              <div class="project-tags">AWS VALIDATED &middot; GITOPS &middot; SECURITY</div>
-              <h3>Auditable Kubernetes delivery across development, staging, and production</h3>
-              <p>Built and validated an Amazon EKS delivery platform where Git controls application promotion, configuration, and rollback across development, staging, and production environments.</p>
-              <p>Terraform provisions the AWS foundation, while GitHub Actions uses repository-scoped OIDC authentication to publish images without long-lived credentials. Argo CD and Helm reconcile the desired state into EKS, Prometheus and Grafana provide operational visibility, and validation covers reconciliation behavior, monitoring deployment, infrastructure provisioning, and complete teardown.</p>
-              <div class="project-metrics"><span>4/4 apps healthy</span><span>20 resources managed</span><span>Drift + rollback validated</span></div>
-              <div class="stack"><span>AWS EKS</span><span>Terraform</span><span>Argo CD</span><span>Helm</span><span>GitHub Actions</span><span>Prometheus</span></div>
+              <p class="project-name">GitOps Delivery Platform</p>
+              <div class="project-tags">AWS VALIDATED &middot; GITOPS &middot; SUPPLY CHAIN</div>
+              <h3>Auditable Kubernetes delivery where Git is the only way in</h3>
+              <p>Built and validated an Amazon EKS delivery platform where Git controls application promotion, configuration, and rollback across dev, staging, prod, and observability namespaces.</p>
+              <p>Terraform composes the AWS foundation as 15 reusable modules under a $25 monthly budget guardrail. GitHub Actions authenticates through branch-scoped OIDC with no stored credentials, and Argo CD reconciles declared state into EKS.</p>
+              <ul class="project-outcomes">
+                <li>Four-gate promotion pipeline: rejects any tag that is not a verified 12-character commit SHA, confirms the commit exists in Git and the image exists in ECR, and lands every promotion as a reviewable pull request</li>
+                <li>Per-namespace RBAC and ResourceQuotas across all four namespaces, with NetworkPolicies on the three application namespaces</li>
+                <li>Drift self-healing and Git-revert rollback validated on a live cluster by injecting a readiness failure and recovering through Git alone</li>
+              </ul>
+              <div class="project-metrics"><span>15 Terraform modules</span><span>4/4 apps healthy</span><span>Drift + rollback validated</span></div>
+              <div class="stack"><span>Amazon EKS</span><span>Argo CD</span><span>Terraform</span><span>Helm</span><span>GitHub Actions</span><span>OIDC</span><span>Prometheus</span></div>
               <div class="project-links">
                 <a href="https://github.com/krishna310301/cloudops-gitops-platform/blob/main/docs/aws-validation-results.md" target="_blank" rel="noopener noreferrer">View validation &rarr;</a>
                 <a href="https://github.com/krishna310301/cloudops-gitops-platform" target="_blank" rel="noopener noreferrer">Source code &#8599;</a>
@@ -138,37 +168,22 @@
 
           <article class="project">
             <div class="project-preview">
-              <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><em>krishna310301/cloudops-sre-platform</em><span class="frame-status"><span class="sdot"></span>source</span></div>
-              <img src="assets/cloudops-sre-platform.png" alt="CloudOps SRE Platform dashboard" />
+              <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><em>krishna310301/cloudops-uptime-monitor</em><span class="frame-status live"><span class="sdot"></span>live</span></div>
+              <img src="assets/cloudops-uptime-monitor.jpg" alt="Serverless Uptime Monitor dashboard showing live endpoint status" />
             </div>
             <div class="project-body">
-              <p class="project-name">CloudOps SRE Platform</p>
-              <div class="project-tags">SRE &middot; EKS &middot; OBSERVABILITY</div>
-              <h3>Connecting service health, deployments, and incidents in one operational view</h3>
-              <p>Built an AWS-based reliability platform that connects application health, Kubernetes deployments, scaling behavior, alerts, and incident context in one operational workflow.</p>
-              <p>The platform runs containerized services on Amazon EKS and uses CloudWatch, Prometheus, and Grafana to expose infrastructure and application signals. Validation uses load testing to exercise autoscaling behavior and service performance under increased demand.</p>
-              <div class="project-metrics"><span>2 &rarr; 6 replicas</span><span>2,035 requests</span><span>99.5% success</span></div>
-              <div class="stack"><span>Amazon EKS</span><span>Terraform</span><span>CloudWatch</span><span>Prometheus</span><span>Grafana</span></div>
-              <div class="project-links">
-                <a href="https://github.com/krishna310301/cloudops-sre-platform/blob/main/docs/aws-demo-run.md" target="_blank" rel="noopener noreferrer">View validation &rarr;</a>
-                <a href="https://github.com/krishna310301/cloudops-sre-platform" target="_blank" rel="noopener noreferrer">Source code &#8599;</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="project">
-            <div class="project-preview">
-              <div class="frame-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><em>cloudops-uptime-monitor</em><span class="frame-status live"><span class="sdot"></span>live</span></div>
-              <img src="assets/cloudops-uptime-monitor.jpg" alt="CloudOps Uptime Monitor dashboard" />
-            </div>
-            <div class="project-body">
-              <p class="project-name">CloudOps Uptime Monitor</p>
-              <div class="project-tags">SERVERLESS &middot; LIVE &middot; INCIDENT RESPONSE</div>
-              <h3>Detecting outages quickly without creating unnecessary alert noise</h3>
-              <p>Built a serverless monitoring application that checks website availability, records status history, displays operational health, and sends alerts only when a monitored endpoint changes state.</p>
-              <p>EventBridge schedules checks every five minutes, Lambda performs validation, DynamoDB stores results, and SNS delivers outage and recovery notifications. CloudWatch provides operational signals, Terraform manages the infrastructure, and a controlled outage-and-recovery drill validates alert-state transitions.</p>
-              <div class="project-metrics"><span>1s detection</span><span>26s to DOWN</span><span>Duplicate alerts suppressed</span></div>
-              <div class="stack"><span>AWS Lambda</span><span>EventBridge</span><span>DynamoDB</span><span>SNS</span><span>CloudWatch</span><span>Terraform</span></div>
+              <p class="project-name">Serverless Uptime Monitor</p>
+              <div class="project-tags">SERVERLESS &middot; LIVE &middot; SECURITY</div>
+              <h3>Detecting outages quickly without creating alert noise</h3>
+              <p>A 53-resource serverless monitoring stack that checks endpoint availability, records status history, and alerts only when a monitored endpoint changes state. This one is deployed and running.</p>
+              <p>EventBridge schedules checks, Lambda performs validation, DynamoDB stores history under TTL retention with point-in-time recovery, SNS delivers notifications, and a CloudFront dashboard serves live state through Origin Access Control.</p>
+              <ul class="project-outcomes">
+                <li>A dedicated latest-status access pattern so dashboard refreshes read 10 current rows instead of scanning 86,400 retained records, holding read cost flat as retention grows</li>
+                <li>SSRF defence rejecting loopback, private, link-local, and EC2 instance-metadata addresses, revalidating targets after DNS resolution before following redirects</li>
+                <li>Stateful alerting across UP&rarr;DOWN, DOWN&rarr;DOWN, and DOWN&rarr;UP transitions, so sustained outages do not page repeatedly while recovery still notifies</li>
+              </ul>
+              <div class="project-metrics"><span>1s detection</span><span>53 AWS resources</span><span>Zero duplicate alerts</span></div>
+              <div class="stack"><span>AWS Lambda</span><span>DynamoDB</span><span>API Gateway</span><span>EventBridge</span><span>CloudFront</span><span>KMS</span><span>X-Ray</span><span>Terraform</span></div>
               <div class="project-links">
                 <a href="https://d3hlcf532b9plq.cloudfront.net" target="_blank" rel="noopener noreferrer">View live project &rarr;</a>
                 <a href="https://github.com/krishna310301/cloudops-uptime-monitor" target="_blank" rel="noopener noreferrer">Source code &#8599;</a>
@@ -187,9 +202,11 @@
               <h3>Tata Communications</h3>
               <strong>Senior Engineer, Shift Lead</strong>
               <ul class="experience-list">
-                <li>Responded to high-severity incidents in a 24/7 network operations environment, performing fault isolation, coordinating restoration activities, and working toward service recovery within established SLAs.</li>
-                <li>Conducted root-cause analysis, maintained incident documentation and shift handoffs, and coordinated with internal teams, field engineers, and external vendors during service-impacting events.</li>
-                <li>Helped lead a five-person shift by prioritizing active incidents, tracking escalations, distributing operational work, and maintaining clear communication across handovers.</li>
+                <li>Led 5-engineer shifts in a 24/7 on-call NOC, owning triage and resolution of 40+ daily priority incidents across 25&ndash;30 Tier-1 carrier clients on global ILL, DWDM, submarine cable, and 100G transport infrastructure.</li>
+                <li>Diagnosed BGP and MPLS routing failures, TCP/IP connectivity faults, DWDM impairments, and hardware failures across Juniper, Huawei, Ciena, and Alcatel platforms.</li>
+                <li>Drove high-severity incident response end to end, coordinating vendor TAC engagement, field dispatch, and customer-premises testing through to service restoration.</li>
+                <li>Prioritized concurrent P1 and P2 incidents in ServiceNow against 99.9% availability and 4-hour restoration commitments, maintaining direct customer communication throughout active outages.</li>
+                <li>Authored post-incident RCAs and structured shift handoffs that preserved troubleshooting context across rotations; earned a Certificate of Excellence for resolving an escalated incident into a documented customer win.</li>
               </ul>
             </div>
           </li>
@@ -198,37 +215,39 @@
 
       <section id="skills" class="section reading-container">
         <h2>Skills</h2>
-        <div class="skills-list">
-          <div class="skill-row">
-            <div class="skill-label">AWS</div>
-            <div class="skill-items">
-              <span>VPC</span><span>IAM</span><span>EKS</span><span>ECR</span><span>Lambda</span><span>DynamoDB</span><span>RDS</span><span>CloudWatch</span>
-            </div>
-          </div>
-          <div class="skill-row">
-            <div class="skill-label">Infrastructure</div>
-            <div class="skill-items">
-              <span>Terraform</span><span>Kubernetes</span><span>Helm</span><span>Argo CD</span><span>Docker</span><span>GitHub Actions</span>
-            </div>
-          </div>
-          <div class="skill-row">
-            <div class="skill-label">Security</div>
-            <div class="skill-items">
-              <span>OIDC</span><span>IRSA</span><span>RBAC</span><span>NetworkPolicies</span><span>Secrets Manager</span><span>Security Groups</span>
-            </div>
-          </div>
-          <div class="skill-row">
-            <div class="skill-label">Reliability</div>
-            <div class="skill-items">
-              <span>Prometheus</span><span>Grafana</span><span>HPA</span><span>k6</span><span>Incident Response</span><span>RCA</span><span>Runbooks</span>
-            </div>
-          </div>
-          <div class="skill-row">
-            <div class="skill-label">Networking &amp; Programming</div>
-            <div class="skill-items">
-              <span>TCP/IP</span><span>BGP</span><span>MPLS</span><span>DNS</span><span>Python</span><span>Bash</span><span>SQL</span>
-            </div>
-          </div>
+        <p class="section-lede">Five things I can do, and where each one is demonstrated. Every number below points to an artifact committed in a public repository.</p>
+        <div class="capabilities">
+
+          <article class="capability">
+            <h3>Provision and decommission AWS infrastructure with Terraform</h3>
+            <p class="capability-proof">A <strong>59-resource</strong> EKS foundation from a 54-create plan &mdash; tiered VPC, managed node group, RDS, ECR, Secrets Manager, IAM &mdash; plus a <strong>53-resource</strong> serverless stack and a third platform composed as <strong>15 reusable modules</strong>. Teardown matters as much as build: one environment was destroyed 54 minutes after apply with closure confirmed across 14 checks.</p>
+            <div class="capability-tools"><span>Terraform</span><span>VPC</span><span>Subnets</span><span>NAT Gateway</span><span>EC2</span><span>EKS</span><span>ECR</span><span>RDS</span><span>Lambda</span><span>API Gateway</span><span>DynamoDB</span><span>S3</span><span>CloudFront</span><span>SNS</span><span>SQS</span><span>EventBridge</span></div>
+          </article>
+
+          <article class="capability">
+            <h3>Make reliability measurable, then test the measurement</h3>
+            <p class="capability-proof">Availability and latency SLIs defined as <strong>6 Prometheus recording rules</strong> scoped to user-facing routes, excluding health, metrics, and load-generation traffic so synthetic load cannot inflate the number. Multi-window burn-rate alerting at <strong>14.4&times; and 6&times;</strong> against a 99.9% target, with the rules themselves covered by <strong>5 promtool test cases</strong>.</p>
+            <div class="capability-tools"><span>Prometheus</span><span>Grafana</span><span>CloudWatch</span><span>Recording rules</span><span>SLIs</span><span>Error budgets</span><span>Burn-rate alerting</span><span>HPA</span><span>k6</span><span>X-Ray</span></div>
+          </article>
+
+          <article class="capability">
+            <h3>Ship changes through a delivery path that can refuse them</h3>
+            <p class="capability-proof">A <strong>four-gate promotion pipeline</strong> that rejects any tag that is not a verified 12-character commit SHA, confirms the commit exists in Git and the image exists in ECR, authenticates through branch-scoped OIDC with no stored credentials, and lands every promotion as a reviewable pull request. Drift self-healing and Git-revert rollback validated on a live cluster.</p>
+            <div class="capability-tools"><span>Argo CD</span><span>GitOps</span><span>Helm</span><span>Kubernetes</span><span>Docker</span><span>GitHub Actions</span><span>CI/CD</span><span>Checkov</span><span>kubeconform</span></div>
+          </article>
+
+          <article class="capability">
+            <h3>Scope access and contain blast radius</h3>
+            <p class="capability-proof">IRSA for pod-level AWS identity, per-namespace RBAC and ResourceQuotas, NetworkPolicies, non-root pod security contexts, and customer-managed KMS keys across DynamoDB, SQS, and S3. User-submitted input is treated as hostile: SSRF defence rejects private and EC2 metadata addresses and <strong>revalidates after DNS resolution</strong> before following redirects.</p>
+            <div class="capability-tools"><span>IAM</span><span>IRSA</span><span>OIDC federation</span><span>RBAC</span><span>NetworkPolicies</span><span>ResourceQuotas</span><span>Pod Security</span><span>KMS</span><span>Secrets Manager</span></div>
+          </article>
+
+          <article class="capability">
+            <h3>Operate production infrastructure under an SLA</h3>
+            <p class="capability-proof">Two years leading <strong>5-engineer shifts</strong> in a 24/7 carrier-grade NOC, owning <strong>40+ daily priority incidents</strong> across 25&ndash;30 Tier-1 clients on global ILL, DWDM, and submarine cable infrastructure. Fault isolation across Juniper, Huawei, Ciena, and Alcatel platforms, vendor TAC coordination, and RCAs written so the next engineer on shift did not start over.</p>
+            <div class="capability-tools"><span>BGP</span><span>MPLS</span><span>DWDM</span><span>TCP/IP</span><span>DNS</span><span>Routing</span><span>Load balancing</span><span>Firewalls</span><span>ServiceNow</span><span>Linux</span><span>Python</span><span>Bash</span><span>SQL</span></div>
+          </article>
+
         </div>
       </section>
 
@@ -330,7 +349,7 @@
           [{ text: "Readiness:", className: "pe-token-key" }, { text: "    " }, { text: "4/4 probes passing", className: "pe-token-value" }],
           [{ text: "Events:", className: "pe-token-key" }],
           [{ text: "  Built three projects · documented · cost-aware", className: "pe-token-event" }],
-          [{ text: "  Last deploy: CloudOps SRE Platform · canary → full · success", className: "pe-token-event" }]
+          [{ text: "  Last deploy: EKS Reliability Platform · canary → full · success", className: "pe-token-event" }]
         ];
 
         let timer = null;
